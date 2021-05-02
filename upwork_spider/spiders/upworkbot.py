@@ -16,17 +16,21 @@ class UpworkSpiderBot(scrapy.Spider):
         # print(response.text)
         descriptions = response.css(".d-xl-block::text").extract()
         prices = response.css(".text-muted .text-muted::text").extract()
+        urls = response.css(".visited::attr(href)").extract()
+        
 
-        for (description, price) in zip(descriptions, prices):        
+        print("Currently on page number: " + str(UpworkSpiderBot.page_number))
+        for (description, price, url) in zip(descriptions, prices, urls):        
             # Storing the extracted data into the items class we created
-            item['descriptions'] = description.strip()
+            item['descriptions'] = ' '.join(description.split())
             item['prices'] = price.strip()
+            item['links'] = url
 
             yield item
         
 
         next_page = "https://www.upwork.com/search/jobs/?page=" + str(UpworkSpiderBot.page_number) + "&q=power%20bi&sort=recency"
         UpworkSpiderBot.page_number+=1
-        if UpworkSpiderBot.page_number<30:
+        if UpworkSpiderBot.page_number<1:
             yield response.follow(next_page, callback = self.parse)
 
