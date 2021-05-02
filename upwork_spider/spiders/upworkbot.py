@@ -31,6 +31,6 @@ class UpworkSpiderBot(scrapy.Spider):
 
         next_page = "https://www.upwork.com/search/jobs/?page=" + str(UpworkSpiderBot.page_number) + "&q=power%20bi&sort=recency"
         UpworkSpiderBot.page_number+=1
-        if UpworkSpiderBot.page_number<1:
+        if UpworkSpiderBot.page_number<30:
             yield response.follow(next_page, callback = self.parse)
 

@@ -10,4 +10,5 @@ class UpworkSpiderItem(scrapy.Item):
     # define the fields for your item here like:
     descriptions = scrapy.Field()
     prices = scrapy.Field()
+    links = scrapy.Field()
 
