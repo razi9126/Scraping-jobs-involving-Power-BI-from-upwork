@@ -22,7 +22,6 @@ class UpworkSpiderBot(scrapy.Spider):
             item['descriptions'] = description.strip()
             item['prices'] = price.strip()
 
-            # yield {'Title': title.encode('utf-8'), 'Vote': vote, "Comments": comment}
             yield item
         
 
